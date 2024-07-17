@@ -1,0 +1,100 @@
+{
+  "Usuario": [
+    {
+      "id": "eda2",
+      "nome": "FELIPE JOSÉ",
+      "cpf": "111.111.111-11",
+      "email": "fe@gmail.com",
+      "telefone": "(47)34899-8889",
+      "admin": true
+    }
+  ],
+  "Atendimentos": [
+  ],
+  "Servicos": [
+    {
+      "id": "1",
+      "nome": "Troca do Pneu",
+      "valor": 20,
+      "descricao": "Troque seu pneu com maior segurança e tranquilidade",
+      "status": 0
+    },
+    {
+      "id": "2",
+      "nome": "Troca de Óleo",
+      "valor": 150,
+      "descricao": "Troque o Óleo do seu carro com uma equipe especializada",
+      "status": 0
+    },
+    {
+      "id": "3",
+      "nome": "Manutenção preventiva",
+      "valor": 200,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "4",
+      "nome": "Cambagem",
+      "valor": 80,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "5",
+      "nome": "Balanceamento",
+      "valor": 60,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "6",
+      "nome": "Alinhamento",
+      "valor": 95,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "7",
+      "nome": "Substituição de velas de ignição",
+      "valor": 160,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "8",
+      "nome": "Manutenção do Ar Condicionado",
+      "valor": 95,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "9",
+      "nome": "Instalação de Central Multimídia",
+      "valor": 125,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "10",
+      "nome": "Instalação de Alarme e Travas Elétricas",
+      "valor": 530,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "11",
+      "nome": "Troca de bateria",
+      "valor": 230,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    },
+    {
+      "id": "12",
+      "nome": "Instalação de rack",
+      "valor": 380,
+      "descricao": "Equipe especializada pronta para cuidar do seu carro",
+      "status": 0
+    }
+  ]
+}
