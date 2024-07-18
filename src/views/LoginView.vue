@@ -5,13 +5,25 @@
                 <v-col md="4" lg="3" sm="3" xs="3">
                     <v-card class="px-12 rounded-xl" elevation="6">
                         <form-login 
-                            @realizando-cadastro="realizandoLogin = false" 
-                            v-show="realizandoLogin"
+                            @realizando-cadastro="realizarLogin(false, infoAlert)" 
+                            v-show="isLogin"
                         />
                         <form-cadastro 
-                            @realizando-login="realizandoLogin = true" 
-                            v-show="!realizandoLogin"
+                            @realizando-login="realizarLogin(true, infoAlert)" 
+                            v-show="!isLogin"
                         />
+                        <v-row>
+                            <v-col cols="12">
+                                <v-alert 
+                                    v-model="infoAlert.mostraAlert"
+                                    :color="infoAlert.colorAlert"
+                                    :icon="infoAlert.iconAlert"
+                                    dark
+                                    >
+                                    {{infoAlert.mensagemAlert}}
+                                </v-alert>
+                            </v-col>
+                        </v-row>
                     </v-card>
                 </v-col>
             </v-row>
@@ -29,9 +41,22 @@ export default {
         FormCadastro,
         AppFooter
     },
+    methods: {
+        realizarLogin(isLogin, infoAlert){
+            console.log('blabla')
+            this.isLogin = isLogin
+            this.infoAlert = infoAlert
+        }
+    },
     data() {
         return {
-            realizandoLogin: true
+            isLogin: true,
+            infoAlert: {
+                mostraAlert: false,
+                mensagemAlert: '',
+                colorAlert: 'success',
+                iconAlert: 'mdi-check'
+            }
         }
     }
 }

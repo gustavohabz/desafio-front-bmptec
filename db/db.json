@@ -7,6 +7,22 @@
       "email": "fe@gmail.com",
       "telefone": "(47)34899-8889",
       "admin": true
+    },
+    {
+      "id": "7dce",
+      "telefone": "(47) 88778-8999",
+      "email": "emailfake@gmail.com.br",
+      "nome": "Gustavo Habitzreiter",
+      "cpf": "555.555.555-55",
+      "admin": false
+    },
+    {
+      "id": "ef9c",
+      "telefone": "(00) 00000-0000",
+      "email": "gustavo.lima@e.vc",
+      "nome": "Gustavo Lima",
+      "cpf": "888.888.888-88",
+      "admin": false
     }
   ],
   "Atendimentos": [

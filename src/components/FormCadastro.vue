@@ -1,5 +1,5 @@
 <template>
-    <v-form v-model="formValido" @submit.prevent="doCadastro">
+    <v-form v-model="formValido" @submit.prevent="validaCadastro" ref="formCadastro">
         <section class="py-6">
             <v-row>
                 <v-col cols="11">
@@ -12,34 +12,37 @@
                         <v-icon 
                             x-large 
                             title="Voltar" 
-                            @click="$emit('realizando-login')">
+                            @click="$emit('realizando-login', null)">
                             mdi-close-circle-outline
                         </v-icon>
                     </h3>
                 </v-col>
             </v-row>
-            <v-col md="12" lg="12" class="mb-n10">
+            <v-col md="12" lg="12" class="mb-n6">
                 <v-text-field
                     label="Nome do Cliente"
                     placeholder="Nome do Cliente"
                     outlined
+                    :rules="$formRules.nomeCliente"
                     v-model="usuario.nome"
                 />
             </v-col>
-            <v-col md="12" lg="12" class="mb-n10">
+            <v-col md="12" lg="12" class="mb-n6">
                 <v-text-field
                     v-mask="'###.###.###-##'"
                     label="CPF"
                     placeholder="000.000.000-00"
                     outlined
+                    :rules="$formRules.cpf"
                     v-model="usuario.cpf"
                 />
             </v-col>
-            <v-col md="12" lg="12" class="mb-n10">
+            <v-col md="12" lg="12" class="mb-n6">
                 <v-text-field
                     label="E-mail"
                     placeholder="email@gmail.com"
                     outlined
+                    :rules="$formRules.email"
                     v-model="usuario.email"
                 />
             </v-col>
@@ -49,6 +52,7 @@
                     label="Telefone"
                     placeholder="(99) 99999-9999"
                     outlined
+                    :rules="$formRules.telefone"
                     v-model="usuario.telefone"
                 />
             </v-col>
@@ -73,8 +77,24 @@ import {mask} from 'vue-the-mask'
 export default {
     directives: {mask},
     methods: {
-        doCadastro() {
-            console.log('Cadastro!')
+        validaCadastro(){
+            if(this.$refs.formCadastro.validate()){
+                this.doCadastro()
+            }
+        },
+        async doCadastro() {
+            this.loading = true
+            const response = await this.$api.Usuario.Post(this.usuario)
+            if(response){
+                const infoAlert = {
+                    mostraAlert: true,
+                    mensagemAlert: 'Cliente cadastrado com sucesso',
+                    colorAlert: 'success',
+                    iconAlert: 'mdi-check'
+                }
+                this.$emit('realizando-login', infoAlert)
+            }
+            this.loading = false
         }
     },
     data() {
@@ -83,9 +103,11 @@ export default {
                 telefone: '',
                 email: '',
                 nome: '',
-                cpf: ''
+                cpf: '',
+                admin: false
             },
-            formValido: false
+            formValido: false,
+            loading: false
         }
     }
 }

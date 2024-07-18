@@ -9,6 +9,7 @@
                     no-data-text="Nenhum serviço registrado."
                     no-results-text="Nenhum serviço encontrado para esta pesquisa."
                     :loading="loading"
+                    loading-text="Carregando..."
                     dark
                 >
                     <template v-slot:top>
@@ -88,13 +89,23 @@
 </template>
 <script>
 export default {
+    computed: {
+        usuarioLogado() {
+            return this.$store.getters.getUsuarioLogin
+        }
+    },
     mounted(){
         this.fetchAtendimentos()
     },
     methods: {
         async fetchAtendimentos(){
             this.loading = true
-            const response = await this.$api.Atendimento.GetAll()
+            let response = null
+            if(this.usuarioLogado.admin){
+                response = await this.$api.Atendimento.GetAll()
+            }else{
+                response = await this.$api.Atendimento.GetAllByUser(this.usuarioLogado.id)
+            }
             this.atendimentos = response
             this.atendimentos.forEach(atendimento => {
                 this.contadorStatusFinalizado = 0

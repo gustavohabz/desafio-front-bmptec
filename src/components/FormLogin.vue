@@ -10,6 +10,7 @@
                     outlined
                     placeholder="000.000.000-00"
                     v-model="cpf"
+                    :rules="$formRules.cpf"
                     style="padding-top: 64px"
                     :loading="loading"
                 />
@@ -21,7 +22,7 @@
                     <v-btn 
                         color="success"
                         block
-                        @click="$emit('realizando-cadastro')"
+                        @click="$emit('realizando-cadastro', null)"
                     >
                         Cadastrar
                     </v-btn>
@@ -47,14 +48,22 @@ export default {
         async doLogin() {
             this.loading = true
             const response = await this.$api.Usuario.GetByCpf(this.cpf)
-            const usuarioLogado = {
-                id: response.id,
-                nome: response.nome,
-                admin: response.admin
-            }
             if(response){
+                const usuarioLogado = {
+                    id: response.id,
+                    nome: response.nome,
+                    admin: response.admin
+                }
                 this.$store.commit('usuarioLogin', usuarioLogado)
                 this.$router.push({name: 'servicos'})
+            }else{
+                const infoAlert = {
+                    mostraAlert: true,
+                    mensagemAlert: 'Erro realizar login!',
+                    colorAlert: 'error',
+                    iconAlert: 'mdi-check'
+                }
+                this.$emit('realizando-login', infoAlert)
             }
             this.loading = false
         }

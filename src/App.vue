@@ -1,12 +1,9 @@
 <template>
   <v-app>
-    <v-main v-if="isUsuarioLogado">
-      <NavbarAdmin v-if="isUsuarioAdmin"/>
+    <v-main>
+      <NavbarAdmin v-if="isUsuarioLogado"/>
       <router-view />
       <AppFooter/>
-    </v-main>
-    <v-main v-if="!isUsuarioLogado">
-      <router-view />
     </v-main>
   </v-app>
 </template>
