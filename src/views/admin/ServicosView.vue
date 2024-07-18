@@ -26,6 +26,16 @@
         </v-card>
     </section>
 </template>
+<script>
+export default{
+    computed: {
+        usuarioLogado() {
+            return this.$store.getters.getUsuarioLogin
+        }
+    }
+}
+</script>
+
 <style scoped>
 .posicionamento-card-servicos{
     padding-top: 25%;

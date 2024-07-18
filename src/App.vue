@@ -20,13 +20,24 @@ export default {
     AppFooter
   },
   name: 'App',
-  mounted() {
-    // const usuarioLogado = localStorage.getItem('usuarioLogado')
-    // this.isUsuarioLogado = (usuarioLogado)
+  computed: {
+      usuarioLogado() {
+          return this.$store.getters.getUsuarioLogin
+      }
+  },
+  updated() {
+    this.$store.commit('inicializaStore')
+    if(this.usuarioLogado){
+      this.isUsuarioLogado = (this.usuarioLogado.hasOwnProperty('id'))
+      this.isUsuarioAdmin = this.usuarioLogado.admin        
+    }else{
+      this.isUsuarioAdmin = false
+      this.isUsuarioLogado = false
+    }
   },
   data: () => ({
-    isUsuarioLogado: true,
-    isUsuarioAdmin: true
+    isUsuarioLogado: false,
+    isUsuarioAdmin: false
   }),
 }
 </script>

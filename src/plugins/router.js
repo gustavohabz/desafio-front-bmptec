@@ -37,28 +37,36 @@ const router = new VueRouter({
   routes,
 })
 
-/*const validaAdmin = (to, usuarioLogado) => {
+const enviaParaHome = () =>{
+  router.push({name: 'home'}).catch(()=>{})
+}
+
+const validaAdmin = (to, usuarioLogado) => {
   if(to.meta.rotaAdmin){
     if(!usuarioLogado.admin){
-      router.push('/')
+      enviaParaHome()
       return false
     }
   }
 }
 
-router.beforeEach(async (to, from, next) => {
-  if(to.meta.rotaAutenticada){
-    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'))
-    console.log(usuarioLogado)
-    if(usuarioLogado){
-      validaAdmin(to, usuarioLogado)
-    }else{
-      router.push('/')
-      return false
+router.beforeResolve(async (to, from, next) => {
+  try {
+    if(to.meta.rotaAutenticada){
+      const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogin'))
+      if(usuarioLogado){
+        validaAdmin(to, usuarioLogado)
+        next()
+      }else{
+        enviaParaHome()
+        return false
+      }
+      next()
     }
-  }else{
     next()
+  } catch(e){
+    enviaParaHome()
   }
-})*/
+})
 
 export default router

@@ -11,7 +11,7 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <strong>
-            ADMIN
+            {{usuarioLogado.nome}}
             <v-icon 
                 @click="doLogout"
                 class="ml-12 mr-6"
@@ -23,15 +23,17 @@
 </template>
 <script>
 export default {
-    methods: {
-        doLogout() {
-            // store.dispatch('setUsuario', null)
-            this.$router.push('/')
+    computed: {
+        usuarioLogado() {
+            return this.$store.getters.getUsuarioLogin
         }
     },
-    data: () => ({
-        usuarioLogado: {}
-    })
+    methods: {
+        doLogout() {
+            this.$store.commit('usuarioLogout', null)
+            this.$router.push({name: 'home'})
+        }
+    }
 }
 </script>
 <style scoped>

@@ -51,15 +51,10 @@ export default {
                 id: response.id,
                 nome: response.nome,
                 admin: response.admin
-                // adicionar token de sessão aqui depois
             }
-            if(response && response.admin){
-                localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado))
-                setTimeout(() => {
-                    this.$router.push({name: 'servicos'})
-                }, 1000)
-            }else{
-                console.log('Implemente a tela de cliente!!')
+            if(response){
+                this.$store.commit('usuarioLogin', usuarioLogado)
+                this.$router.push({name: 'servicos'})
             }
             this.loading = false
         }
