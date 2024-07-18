@@ -5,6 +5,10 @@ const cpf =  [
     v => v.length == 14 || 'CPF deve ter no mínimo 14 caracteres'
 ]
 
+const usuarioIdCpf = [
+    v => !!v || 'O campo "CPF" é obrigatório'
+]
+
 const modeloVeiculo = [
     v => !!v || 'O campo "Modelo do Veículo" é obrigatório'
 ]
@@ -55,5 +59,6 @@ export default {
     dataAtendimento,
     nomeCliente,
     email,
-    telefone
+    telefone,
+    usuarioIdCpf
 }

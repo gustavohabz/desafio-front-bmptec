@@ -36,7 +36,7 @@
                                             label="CPF"
                                             outlined
                                             no-data-text="Nenhum CPF encontrado."
-                                            :rules="$formRules.cpf"
+                                            :rules="$formRules.usuarioIdCpf"
                                             :items="usuarios"
                                             item-text="cpf"
                                             item-value="id"

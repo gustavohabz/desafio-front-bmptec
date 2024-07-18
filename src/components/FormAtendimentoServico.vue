@@ -158,8 +158,8 @@ export default {
             this.atendimento.dataAtendimento = dataFormatada
         },
         removerServico(item) {
-            const index = this.atendimento.servicos.indexOf(item.value)
-            this.atendimento.servicos.splice(index, 1)
+            const index = this.atendimento.servicoIds.indexOf(item.index)
+            this.atendimento.servicoIds.splice(index, 1)
         },
         getAnosDeVeiculo() {
             for(let i=maxAnosDeVeiculo; i>=minAnosDeVeiculo; i--){
