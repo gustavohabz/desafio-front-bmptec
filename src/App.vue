@@ -1,7 +1,11 @@
 <template>
   <v-app>
-    <v-main>
-      <NavbarAdmin v-if="isUsuarioLogado && isUsuarioAdmin"/>
+    <v-main v-if="isUsuarioLogado">
+      <NavbarAdmin v-if="isUsuarioAdmin"/>
+      <router-view />
+      <AppFooter/>
+    </v-main>
+    <v-main v-if="!isUsuarioLogado">
       <router-view />
     </v-main>
   </v-app>
@@ -9,19 +13,25 @@
 
 <script>
 import NavbarAdmin from './components/NavbarAdmin.vue'
-import store from './plugins/store.js'
+import AppFooter from './components/AppFooter.vue'
 export default {
   components: {
-    NavbarAdmin
+    NavbarAdmin,
+    AppFooter
   },
   name: 'App',
   mounted() {
-    const usuarioLogado = localStorage.getItem('usuarioLogado')
-    this.isUsuarioLogado = (usuarioLogado)
+    // const usuarioLogado = localStorage.getItem('usuarioLogado')
+    // this.isUsuarioLogado = (usuarioLogado)
   },
   data: () => ({
-    isUsuarioLogado: false,
-    isUsuarioAdmin: false
+    isUsuarioLogado: true,
+    isUsuarioAdmin: true
   }),
 }
 </script>
+<style>
+.v-main {
+  background-color: #e6e6e6;
+}
+</style>

@@ -9,9 +9,24 @@ const routes = [
     component: () => import('../views/LoginView.vue'),
     meta: { rotaAdmin: false, rotaAutenticada: false }
   },
-  { path: '/admin/servicos',
-    name: 'home',
+  { path: '/servicos',
+    name: 'servicos',
     component: () => import('../views/admin/ServicosView.vue'),
+    meta: { rotaAdmin: true, rotaAutenticada: true }
+  },
+  { path: '/servicos/solicitar',
+    name: 'servicosSolicitar',
+    component: () => import('../views/admin/SolicitarServicoView.vue'),
+    meta: { rotaAdmin: true, rotaAutenticada: true }
+  },
+  { path: '/servicos/listar',
+    name: 'servicosListar',
+    component: () => import('../views/admin/ListarServicoView.vue'),
+    meta: { rotaAdmin: true, rotaAutenticada: true }
+  },
+  { path: '/servicos/editar/:id',
+    name: 'servicosEditar',
+    component: () => import('../views/admin/EditarServicoView.vue'),
     meta: { rotaAdmin: true, rotaAutenticada: true }
   },
 ]
@@ -22,7 +37,7 @@ const router = new VueRouter({
   routes,
 })
 
-const validaAdmin = (to, usuarioLogado) => {
+/*const validaAdmin = (to, usuarioLogado) => {
   if(to.meta.rotaAdmin){
     if(!usuarioLogado.admin){
       router.push('/')
@@ -44,6 +59,6 @@ router.beforeEach(async (to, from, next) => {
   }else{
     next()
   }
-})
+})*/
 
 export default router

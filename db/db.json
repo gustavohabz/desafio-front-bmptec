@@ -10,6 +10,33 @@
     }
   ],
   "Atendimentos": [
+    {
+      "id": "3080",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "TESTE",
+      "corVeiculo": "AZUL",
+      "placaVeiculo": "AZK-4231",
+      "anoVeiculo": 2012,
+      "dataAtendimento": "10/07/2024",
+      "servicoIds": [
+        "5",
+        "4"
+      ]
+    },
+    {
+      "id": "f683",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "Novo Modelo",
+      "corVeiculo": "Azul",
+      "placaVeiculo": "IOK-9821",
+      "anoVeiculo": 2009,
+      "dataAtendimento": "24/07/2024",
+      "servicoIds": [
+        "5",
+        "6",
+        "11"
+      ]
+    }
   ],
   "Servicos": [
     {

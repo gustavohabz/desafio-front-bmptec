@@ -1,9 +1,10 @@
 <template>
     <v-app-bar
         color="white"
-        elevation="0">
-        <v-toolbar-title>
-            <strong class="ml-6">
+        elevation="12"
+        style="z-index: 1">
+        <v-toolbar-title @click="$router.push('/servicos')" class="hover-title">
+            <strong class="ml-6" >
                 <img class="mr-3" height="32px" src="../assets/logo.png" /> 
                 AUTO ELÉTRICA FULLTECH
             </strong>
@@ -11,22 +12,21 @@
         <v-spacer></v-spacer>
         <strong>
             ADMIN
-            <v-icon>mdi-logout</v-icon>
+            <v-icon 
+                @click="doLogout"
+                class="ml-12 mr-6"
+            >
+                mdi-logout
+            </v-icon>
         </strong>
     </v-app-bar>
 </template>
 <script>
-import store from './../plugins/store.js'
 export default {
-    mounted(){
-        const usuarioLogado = localStorage.getItem('usuarioLogado')
-        if(!usuarioLogado || !usuarioLogado.admin || usuarioLogado){
-            this.$router.push('')
-        }
-    },
     methods: {
-        logout() {
-            store.dispatch('setUsuario', null)
+        doLogout() {
+            // store.dispatch('setUsuario', null)
+            this.$router.push('/')
         }
     },
     data: () => ({
@@ -34,3 +34,8 @@ export default {
     })
 }
 </script>
+<style scoped>
+.hover-title:hover{
+    cursor: pointer;
+}
+</style>

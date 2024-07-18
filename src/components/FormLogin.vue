@@ -41,7 +41,6 @@
 </template>
 <script>
 import {mask} from 'vue-the-mask'
-import store from './../plugins/store.js'
 export default {
     directives: {mask},
     methods: {
@@ -57,7 +56,7 @@ export default {
             if(response && response.admin){
                 localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado))
                 setTimeout(() => {
-                    this.$router.push('/admin/servicos')
+                    this.$router.push({name: 'servicos'})
                 }, 1000)
             }else{
                 console.log('Implemente a tela de cliente!!')

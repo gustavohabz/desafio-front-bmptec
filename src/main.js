@@ -6,8 +6,10 @@ import vuetify from './plugins/vuetify'
 import api from './plugins/_api'
 import './plugins/axios'
 import VueTheMask from 'vue-the-mask'
+import formRules from './plugins/formRules'
 
 Vue.prototype.$api = api
+Vue.prototype.$formRules = formRules
 Vue.config.productionTip = false
 
 new Vue({
