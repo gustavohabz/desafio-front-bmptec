@@ -85,6 +85,31 @@
           "status": 0
         }
       ]
+    },
+    {
+      "id": "ee1a",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "1231212",
+      "corVeiculo": "123123",
+      "placaVeiculo": "SDF-1231",
+      "anoVeiculo": 2024,
+      "dataAtendimento": "02/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "6",
+          "nome": "Alinhamento",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
+      ]
     }
   ],
   "Servicos": [

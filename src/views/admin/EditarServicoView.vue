@@ -19,7 +19,18 @@
                 </v-col>
             </v-row>
         </v-card-title>
-        <v-row>
+        <v-row v-show="servicoNaoEncontrado" class="mt-6">
+            <v-col cols="10" offset="1">
+                <v-alert
+                    color="error"
+                    icon="mdi-alert-circle-outline"
+                    dark
+                >
+                    Serviço não encontrado
+                </v-alert>
+            </v-col>
+        </v-row>
+        <v-row v-show="!servicoNaoEncontrado">
             <v-col cols="6" offset="1">
                 <v-btn
                     color="success"
@@ -31,7 +42,7 @@
                 </v-btn>
             </v-col>
         </v-row>
-        <v-row>
+        <v-row  v-show="!servicoNaoEncontrado">
             <v-col cols="10" offset="1">
                 <v-data-table
                     :items="servicosTabela"
@@ -85,7 +96,7 @@
                 <AlertComponente />
             </v-col>
         </v-row>
-        <v-row>
+        <v-row  v-show="!servicoNaoEncontrado">
             <v-col cols="4" offset="1">
                 <v-btn
                     dark
@@ -134,6 +145,7 @@ export default {
             servicos: [],
             selectStatusItems: [],
             selectServicos: [],
+            servicoNaoEncontrado: false,
             alertSucessoSalvar: this.$constants.getAlert('sucesso', 'Serviços alterados com sucesso.', 5000),
             alertErroSalvar: this.$constants.getAlert('erro', 'Erro ao salvar os serviços.', 5000),
             alertErroItemDuplicado: this.$constants.getAlert('erro', 'Existem itens duplicados.', 5000),
@@ -150,6 +162,7 @@ export default {
         async atualizaServicosAtendimento(){
             const obj = this.atendimento
             const response = await this.$api.Atendimento.Patch(this.atendimentoId, obj)
+            
             if(response){
                 this.triggerAlert(this.alertSucessoSalvar)
             }else{
@@ -157,10 +170,14 @@ export default {
             }
         },
         async fetchAtendimento(){
-            const response = await this.$api.Atendimento.GetById(this.atendimentoId)
-            this.servicosTabela = response.servicos
-            this.atendimento.servicos = response.servicos
-            this.fetchServicos()
+            try {
+                const response = await this.$api.Atendimento.GetById(this.atendimentoId)
+                this.servicosTabela = response.servicos
+                this.atendimento.servicos = response.servicos
+                this.fetchServicos()
+            } catch(e) {
+                this.servicoNaoEncontrado = true
+            }
         },
         removeServico(index) {
             this.atendimento.servicos.splice(index, 1)

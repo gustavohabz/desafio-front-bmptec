@@ -25,7 +25,7 @@ const routes = [
     component: () => import('../views/ListarServicoView.vue'),
     meta: { rotaAutenticada: true, rotaAdmin: false  }
   },
-  { path: '/servicos/editar/:id',
+  { path: '/admin/servicos/editar/:id',
     name: 'servicosEditar',
     component: () => import('../views/admin/EditarServicoView.vue'),
     meta: { rotaAutenticada: true, rotaAdmin: true }
@@ -35,6 +35,11 @@ const routes = [
     component: () => import('../views/admin/AdicionaAdminView.vue'),
     meta: { rotaAutenticada: true, rotaAdmin: true }
   },
+  { path: '*',
+    name: 'PaginaNaoEncontrada',
+    component: () => import('../views/PaginaNaoEncontrada.vue'),
+    meta: { rotaAutenticada: false, rotaAdmin: false }
+  }
 ]
 
 const router = new VueRouter({
