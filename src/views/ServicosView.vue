@@ -42,7 +42,7 @@ export default{
     bottom: auto;
 }
 .fundo-servicos{
-    background-image: url("../../assets/background.png");
+    background-image: url("../assets/background.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

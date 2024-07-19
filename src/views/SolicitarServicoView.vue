@@ -92,8 +92,8 @@
 </template>
 <script>
 import {mask} from 'vue-the-mask'
-import FormAtendimentoServico from '../../components/FormAtendimentoServico.vue'
-import TituloCardAtendimento from './../../components/TituloCardAtendimento.vue'
+import FormAtendimentoServico from './../components/FormAtendimentoServico.vue'
+import TituloCardAtendimento from './../components/TituloCardAtendimento.vue'
 export default {
     components: {
         FormAtendimentoServico,

@@ -132,7 +132,7 @@
     </v-card>
 </template>
 <script>
-import AlertComponente from './../../components/AlertComponente.vue'
+import AlertComponente from './../components/AlertComponente.vue'
 export default {
     components: {
         AlertComponente
@@ -149,11 +149,12 @@ export default {
         async fetchAtendimentos(){
             this.loading = true
             let response = null
-            if(this.usuarioLogado.admin){
+            const usuarioLogado = (this.usuarioLogado ? this.usuarioLogado : this.usuarioStorage)
+            if(usuarioLogado.admin){
                 this.addCabecalhoAcoes()
                 response = await this.$api.Atendimento.GetAll()
             }else{
-                response = await this.$api.Atendimento.GetAllByUser(this.usuarioLogado.id)
+                response = await this.$api.Atendimento.GetAllByUser(usuarioLogado.id)
             }
             this.atendimentos = response
             this.loading = false
@@ -216,6 +217,7 @@ export default {
             }else{
                 try {
                     this.usuarioStorage = JSON.parse(localStorage.getItem('usuarioLogin'))
+                    this.fetchAtendimentos()
                 } catch(e){
                     console.log('Erro')
                 }
