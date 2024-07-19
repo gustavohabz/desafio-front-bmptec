@@ -4,7 +4,7 @@
             <v-col cols="12">
                 <TituloCardAtendimento />
             </v-col>
-            <v-col cols="8" offset="2">
+            <v-col cols="8" offset-xs="0" offset="2">
                 <v-stepper
                     v-model="passos"
                 >
@@ -27,12 +27,13 @@
                     <v-stepper-items>
                         <v-stepper-content step="1">
                             <v-row>
-                                <v-col cols="6" offset="3">
+                                <v-col lg="6" md="6" sm="12" xs="12" offset-lg="3" offset-md="3">
                                     <v-form 
                                         v-model="formClienteValido"
                                         ref="formClienteRef"
                                         >
                                         <v-autocomplete
+                                            maxlength="14"
                                             label="CPF"
                                             outlined
                                             no-data-text="Nenhum CPF encontrado."
@@ -89,14 +90,12 @@ export default {
     methods: {
         async criarOrdem(atendimentoServico) {
             const atendimentoObjFinal = {...this.atendimentoCliente, ...atendimentoServico}
-            console.log(atendimentoObjFinal)
             const response = await this.$api.Atendimento.Post(atendimentoObjFinal)
-            console.log(response)
-            this.$router.push({name: 'servicosListar'})
-        },
-        validaFormCpf() {
-            if(this.$refs.formClienteRef.validate()){
-                this.passos = 2
+            if(response){
+                this.triggerAlert(this.alertSucessoAdicionar)
+                this.$router.push({name: 'servicosListar'})
+            }else{
+                this.triggerAlert(this.alertErroAdicionar)
             }
         },
         async findUsuariosByCpf(cpf) {
@@ -104,7 +103,15 @@ export default {
             const response = await this.$api.Usuario.GetByCpf(cpf)
             this.usuarios = [response]
             this.loadingCpf = false
-        }
+        },
+        validaFormCpf() {
+            if(this.$refs.formClienteRef.validate()){
+                this.passos = 2
+            }
+        },
+        triggerAlert(alerta){
+           this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
+        },
     },
     data(){
         return{
@@ -115,7 +122,9 @@ export default {
             formClienteValido: false,
             loadingCpf: false,
             pesquisaCpf: '',
-            usuarios: []
+            usuarios: [],
+            alertSucessoAdicionar: this.$constants.getAlert('sucesso', 'Atendimento solicitado.', 5000),
+            alertErroAdicionar: this.$constants.getAlert('erro', 'Erro ao solicitar atendimento.', 5000),
         }
     },
     watch: {

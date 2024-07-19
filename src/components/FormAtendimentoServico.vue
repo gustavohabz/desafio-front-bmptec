@@ -5,7 +5,7 @@
         lazy-validation
         >
         <v-row style="padding-top: 16px">
-            <v-col cols="8">
+            <v-col md="8" lg="8" sm="12" xs="12">
                 <v-text-field
                     label="Modelo do Veículo"
                     outlined
@@ -13,7 +13,7 @@
                     v-model="atendimento.modeloVeiculo"
                 />
             </v-col>
-            <v-col cols="4">
+            <v-col md="4" lg="4" sm="12" xs="12">
                 <v-text-field
                     label="Cor do Veículo"
                     outlined
@@ -46,11 +46,11 @@
         <v-row style="margin-bottom: 32px">
             <v-col cols="8">
                 <v-autocomplete
-                    v-model="atendimento.servicoIds"
+                    v-model="atendimento.servicos"
                     :items="servicos"
                     label="Serviços"
                     no-data-text="Nenhum serviço encontrado."
-                    item-value="id"
+                    return-object
                     item-text="nome"
                     :loading="loadingServicos"
                     :rules="$formRules.servicosVeiculo"
@@ -138,7 +138,7 @@ export default {
                 placaVeiculo: '',
                 anoVeiculo: '',
                 dataAtendimento: '',
-                servicoIds: []
+                servicos: []
             },
             loadingServicos: false,
             anosDeVeiculo: [],
@@ -158,8 +158,8 @@ export default {
             this.atendimento.dataAtendimento = dataFormatada
         },
         removerServico(item) {
-            const index = this.atendimento.servicoIds.indexOf(item.index)
-            this.atendimento.servicoIds.splice(index, 1)
+            const index = this.atendimento.servicos.indexOf(item.index)
+            this.atendimento.servicos.splice(index, 1)
         },
         getAnosDeVeiculo() {
             for(let i=maxAnosDeVeiculo; i>=minAnosDeVeiculo; i--){

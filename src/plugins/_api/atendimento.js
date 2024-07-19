@@ -15,7 +15,7 @@ export default {
   GetAllByUser: function (id) {
     return new Promise((resolve) => {
       axios.get('Atendimentos').then((res) => {
-        const atendimentos = res.data.filter(at => at.idUsuario === id)
+        const atendimentos = res.data.filter(at => at.usuarioId === id)
         resolve(atendimentos)
       })
     })
@@ -33,7 +33,7 @@ export default {
   },
   Patch: function (id, data) {
     return new Promise((resolve) => {
-      axios.put(`Atendimentos/${id}`, data).then((res) => resolve(res.data))
+      axios.patch(`Atendimentos/${id}`, data).then((res) => resolve(res.data))
     })
   },
   Delete: function (id) {

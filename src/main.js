@@ -7,9 +7,11 @@ import api from './plugins/_api'
 import './plugins/axios'
 import VueTheMask from 'vue-the-mask'
 import formRules from './plugins/formRules'
+import constants from './plugins/constants'
 
 Vue.prototype.$api = api
 Vue.prototype.$formRules = formRules
+Vue.prototype.$constants = constants
 Vue.config.productionTip = false
 
 new Vue({

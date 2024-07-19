@@ -23,34 +23,88 @@
       "nome": "Gustavo Lima",
       "cpf": "888.888.888-88",
       "admin": false
+    },
+    {
+      "id": "f349",
+      "telefone": "(12) 31231-3121",
+      "email": "email@teste.com.br",
+      "nome": "1212312312312",
+      "cpf": "222.222.222-22",
+      "admin": false
+    },
+    {
+      "id": "60db",
+      "telefone": "(66) 66666-6666",
+      "email": "teste@testeado.com.br",
+      "nome": "Novo Usuário",
+      "cpf": "121.212.121-21",
+      "admin": false
+    },
+    {
+      "id": "6440",
+      "telefone": "(92) 92929-2929",
+      "email": "sucesso@cliente.com.br",
+      "nome": "Cliente Sucesso",
+      "cpf": "000.000.000-00",
+      "admin": false
     }
   ],
   "Atendimentos": [
     {
-      "id": "3080",
+      "id": "afe3",
       "usuarioId": "eda2",
-      "modeloVeiculo": "TESTE",
-      "corVeiculo": "AZUL",
-      "placaVeiculo": "AZK-4231",
-      "anoVeiculo": 2012,
-      "dataAtendimento": "10/07/2024",
-      "servicoIds": [
-        "5",
-        "4"
+      "modeloVeiculo": "Teste",
+      "corVeiculo": "Azul",
+      "placaVeiculo": "KOL-4213",
+      "anoVeiculo": 2014,
+      "dataAtendimento": "25/07/2024",
+      "servicos": [
+        {
+          "id": "1",
+          "nome": "Troca do Pneu",
+          "valor": 20,
+          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
+          "status": 2
+        },
+        {
+          "id": "8",
+          "nome": "Manutenção do Ar Condicionado",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 1
+        }
       ]
     },
     {
-      "id": "f683",
-      "usuarioId": "eda2",
-      "modeloVeiculo": "Novo Modelo",
-      "corVeiculo": "Azul",
-      "placaVeiculo": "IOK-9821",
-      "anoVeiculo": 2009,
-      "dataAtendimento": "24/07/2024",
-      "servicoIds": [
-        "5",
-        "6",
-        "11"
+      "id": "9fae",
+      "usuarioId": "7dce",
+      "modeloVeiculo": "Modelooo",
+      "corVeiculo": "Cooor",
+      "placaVeiculo": "PLA-5432",
+      "anoVeiculo": 1999,
+      "dataAtendimento": "10/07/2024",
+      "servicos": [
+        {
+          "id": "10",
+          "nome": "Instalação de Alarme e Travas Elétricas",
+          "valor": 530,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "7",
+          "nome": "Substituição de velas de ignição",
+          "valor": 160,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 1
+        },
+        {
+          "id": "8",
+          "nome": "Manutenção do Ar Condicionado",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
       ]
     }
   ],

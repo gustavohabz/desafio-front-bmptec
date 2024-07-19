@@ -13,4 +13,9 @@ export default {
       .catch(() => reject('Atendimento não encontrado'))
     })
   },
+  Patch: function (id, data) {
+    return new Promise((resolve) => {
+      axios.patch(`Servicos/${id}`, data).then((res) => resolve(res.data))
+    })
+  },
 }

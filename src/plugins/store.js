@@ -3,11 +3,17 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const jsonRegex = /^[\],:{}\s]*$/
-
 export default new Vuex.Store({
   state: {
-    usuarioLogin: {}
+    usuarioLogin: {},
+    infoAlert: {
+      mostraAlert: false,
+      mensagemAlert: '',
+      colorAlert: '',
+      iconAlert: 'mdi-check',
+      tituloAlert: ''
+    },
+    idTimeoutAlert: null
   },
   getters: {
     getUsuarioLogin (state){
@@ -16,6 +22,9 @@ export default new Vuex.Store({
       } catch (e){
         return null
       }
+    },
+    getInfoAlert (state){
+      return state.infoAlert
     }
   },
   mutations: {
@@ -31,8 +40,34 @@ export default new Vuex.Store({
       if(localStorage.getItem('usuarioLogin')){
         state.usuarioLogin = localStorage.getItem('usuarioLogin')
       }
+    },
+    setInfoAlert(state, infoAlert){
+      state.infoAlert.mensagemAlert = infoAlert.mensagemAlert
+      state.infoAlert.colorAlert = infoAlert.colorAlert
+      state.infoAlert.iconAlert = infoAlert.iconAlert
+      state.infoAlert.tituloAlert = infoAlert.tituloAlert
+    },
+    mostraAlert(state, tempoAlert){
+      state.infoAlert.mostraAlert = true
+      state.idTimeoutAlert = setTimeout(() => {
+        state.infoAlert.mostraAlert = false
+      }, tempoAlert)
+    },
+    finalizaAlert(state){
+      state.infoAlert.mostraAlert = false
     }
   },
-  actions: {},
+  actions: {
+    atualizaStoreLogin({commit}){
+      commit('inicializaStore')
+    },
+    setAndTriggerInfoAlert({commit}, infoAlert){
+      commit('setInfoAlert', infoAlert)
+      commit('mostraAlert', infoAlert.tempoAlert)
+    },
+    finalizaAlert({commit}){
+      commit('finalizaAlert')
+    }
+  },
   modules: {},
 })

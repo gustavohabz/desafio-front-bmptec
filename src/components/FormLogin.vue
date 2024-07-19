@@ -1,5 +1,5 @@
 <template>
-    <v-form v-model="formValido" @submit.prevent="doLogin">
+    <v-form ref="formLoginRef" v-model="formValido" @submit.prevent="doLogin">
         <section class="py-12">
             <v-img class="mx-auto" max-height="64px" max-width="64px" src="../assets/logo.png" />
             <h3 class="text-center" style="padding-top: 32px">AUTO ELÉTRICA FULLTECH</h3>
@@ -47,32 +47,33 @@ export default {
     methods: {
         async doLogin() {
             this.loading = true
-            const response = await this.$api.Usuario.GetByCpf(this.cpf)
-            if(response){
-                const usuarioLogado = {
-                    id: response.id,
-                    nome: response.nome,
-                    admin: response.admin
+            if(this.$refs.formLoginRef.validate()){
+                const response = await this.$api.Usuario.GetByCpf(this.cpf)
+                if(response){
+                    const usuarioLogado = {
+                        id: response.id,
+                        nome: response.nome,
+                        admin: response.admin
+                    }
+                    this.$store.commit('usuarioLogin', usuarioLogado)
+                    this.$router.push({name: 'servicos'})
+                }else{
+                    this.triggerAlert(this.alertErroLogin)
+                    this.$emit('realizando-login', true)
                 }
-                this.$store.commit('usuarioLogin', usuarioLogado)
-                this.$router.push({name: 'servicos'})
-            }else{
-                const infoAlert = {
-                    mostraAlert: true,
-                    mensagemAlert: 'Erro realizar login!',
-                    colorAlert: 'error',
-                    iconAlert: 'mdi-check'
-                }
-                this.$emit('realizando-login', infoAlert)
             }
             this.loading = false
+        },
+        triggerAlert(alerta){
+            this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
         }
     },
     data() {
         return {
             cpf: '',
             formValido: false,
-            loading: false
+            loading: false,
+            alertErroLogin: this.$constants.getAlert('erro', 'Erro ao realizar login, crie uma conta na opção "cadastrar".', 3000)
         }
     }
 }

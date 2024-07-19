@@ -12,7 +12,7 @@
                         <v-icon 
                             x-large 
                             title="Voltar" 
-                            @click="$emit('realizando-login', null)">
+                            @click="$emit('realizando-login')">
                             mdi-close-circle-outline
                         </v-icon>
                     </h3>
@@ -77,24 +77,30 @@ import {mask} from 'vue-the-mask'
 export default {
     directives: {mask},
     methods: {
-        validaCadastro(){
-            if(this.$refs.formCadastro.validate()){
+        async validaExistenciaCpf(){
+            const response = await this.$api.Usuario.GetByCpf(this.usuario.cpf)
+            if(!response){
                 this.doCadastro()
+            }else{
+                this.triggerAlert(this.alertErroCadastro)
             }
         },
         async doCadastro() {
             this.loading = true
             const response = await this.$api.Usuario.Post(this.usuario)
             if(response){
-                const infoAlert = {
-                    mostraAlert: true,
-                    mensagemAlert: 'Cliente cadastrado com sucesso',
-                    colorAlert: 'success',
-                    iconAlert: 'mdi-check'
-                }
-                this.$emit('realizando-login', infoAlert)
+                this.triggerAlert(this.alertSucessoCadastro)
+                this.$emit('realizando-login')
             }
             this.loading = false
+        },
+        validaCadastro(){
+            if(this.$refs.formCadastro.validate()){
+                this.validaExistenciaCpf()
+            }
+        },
+        triggerAlert(alerta){
+            this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
         }
     },
     data() {
@@ -107,7 +113,9 @@ export default {
                 admin: false
             },
             formValido: false,
-            loading: false
+            loading: false,
+            alertErroCadastro: this.$constants.getAlert('erro', 'Já existe um usuário com este CPF.', 5000),
+            alertSucessoCadastro: this.$constants.getAlert('sucesso', 'Usuário criado com sucesso.', 5000)
         }
     }
 }

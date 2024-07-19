@@ -11,7 +11,7 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <strong>
-            {{usuarioLogado.nome}}
+            {{usuarioLogado.nome}} {{(usuarioLogado.admin ? '(admin)' : '')}}
             <v-icon 
                 @click="doLogout"
                 class="ml-12 mr-6"
