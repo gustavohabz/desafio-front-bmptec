@@ -42,6 +42,7 @@
 </template>
 <script>
 import {mask} from 'vue-the-mask'
+import { mapActions } from 'vuex'
 export default {
     directives: {mask},
     methods: {
@@ -55,7 +56,8 @@ export default {
                         nome: response.nome,
                         admin: response.admin
                     }
-                    this.$store.commit('usuarioLogin', usuarioLogado)
+                    this.$store.dispatch('realizaLogin', usuarioLogado)
+                    this.atualizaStore()
                     this.$router.push({name: 'servicos'})
                 }else{
                     this.triggerAlert(this.alertErroLogin)
@@ -64,9 +66,15 @@ export default {
             }
             this.loading = false
         },
+        async atualizaStore(){
+            await this.atualizaStoreLogin()
+        },
         triggerAlert(alerta){
             this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
-        }
+        },
+        ...mapActions([
+            'atualizaStoreLogin'
+        ]),
     },
     data() {
         return {

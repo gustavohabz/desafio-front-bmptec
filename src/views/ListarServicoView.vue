@@ -137,24 +137,20 @@ export default {
     components: {
         AlertComponente
     },
-    computed: {
-        usuarioLogado() {
-            return this.$store.getters.getUsuarioLogin
-        }
-    },
     mounted(){
-        this.validaUsuarioLogado()
+        this.usuarioLogado = this.$store.getters.getUsuarioLogin
+        console.log(this.$store.getters.getUsuarioLogin)
+        this.fetchAtendimentos()
     },
     methods: {
         async fetchAtendimentos(){
             this.loading = true
             let response = null
-            const usuarioLogado = (this.usuarioLogado ? this.usuarioLogado : this.usuarioStorage)
-            if(usuarioLogado.admin){
+            if(this.usuarioLogado.admin){
                 this.addCabecalhoAcoes()
                 response = await this.$api.Atendimento.GetAll()
             }else{
-                response = await this.$api.Atendimento.GetAllByUser(usuarioLogado.id)
+                response = await this.$api.Atendimento.GetAllByUser(this.usuarioLogado.id)
             }
             this.atendimentos = response
             this.loading = false
@@ -210,19 +206,6 @@ export default {
         triggerAlert(alerta){
            this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
         },
-        validaUsuarioLogado(){
-            if(this.usuarioLogado != null){
-                this.fetchAtendimentos()
-                this.coletouDoComputed = true
-            }else{
-                try {
-                    this.usuarioStorage = JSON.parse(localStorage.getItem('usuarioLogin'))
-                    this.fetchAtendimentos()
-                } catch(e){
-                    console.log('Erro')
-                }
-            }
-        },
         fetchServicoById(idArray){
             let arrResponses = []
             idArray.forEach(async id => {
@@ -253,7 +236,7 @@ export default {
             alertSucessoRemover: this.$constants.getAlert('sucesso', 'Atendimento removido com sucesso.', 5000),
             alertErroRemover: this.$constants.getAlert('erro', 'Erro ao remover o atendimento.', 5000),
             naoAdicionouAcoesTabela: true,
-            usuarioStorage: {}
+            usuarioLogado: {}
         }
     }
 }

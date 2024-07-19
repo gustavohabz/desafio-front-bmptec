@@ -3,7 +3,7 @@
         color="white"
         elevation="12"
         style="z-index: 1">
-        <v-toolbar-title @click="$router.push('/servicos')" class="hover-title">
+        <v-toolbar-title @click="$router.push({name: 'servicos'})" class="hover-click">
             <strong class="ml-6" >
                 <img class="mr-3" height="32px" src="../assets/logo.png" /> 
                 AUTO ELÉTRICA FULLTECH
@@ -11,33 +11,64 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <strong>
-            {{usuarioLogado.nome}} {{(usuarioLogado.admin ? '(admin)' : '')}}
-            <v-icon 
+            {{usuarioLogado.nome}} 
+            <!-- <span class="ml-6" v-show="usuarioLogado.admin">
+                (ADMIN)
+            </span> -->
+            <v-btn 
+                v-show="usuarioLogado.admin" 
+                @click="$router.push({name: 'AdicionaAdmin'})" 
+                class="hover-click ml-6"
+                fab
+                text
+                title="Adicionar Usuário Admin">
+                <v-icon>
+                    mdi-account-plus
+                </v-icon>
+            </v-btn>
+            <v-btn
                 @click="doLogout"
                 class="ml-12 mr-6"
-            >
-                mdi-logout
-            </v-icon>
+                fab
+                text
+                >
+                <v-icon>
+                    mdi-logout
+                </v-icon>
+            </v-btn>
         </strong>
     </v-app-bar>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     computed: {
-        usuarioLogado() {
-            return this.$store.getters.getUsuarioLogin
+        ...mapGetters([
+            'getUsuarioLogin'
+        ])
+    },
+    async mounted(){
+        await this.atualizaStoreLogin()
+        this.usuarioLogado = this.$store.getters.getUsuarioLogin
+    },
+    data() {
+        return {
+            usuarioLogado: {}
         }
     },
     methods: {
         doLogout() {
-            this.$store.commit('usuarioLogout', null)
+            this.$store.dispatch('realizaLogout', null)
             this.$router.push({name: 'home'})
-        }
+        },
+        ...mapActions([
+            'atualizaStoreLogin'
+        ])
     }
 }
 </script>
 <style scoped>
-.hover-title:hover{
+.hover-click:hover{
     cursor: pointer;
 }
 </style>

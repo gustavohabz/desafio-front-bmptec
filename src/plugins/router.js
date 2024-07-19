@@ -57,6 +57,10 @@ const validaRotaAdmin = (isAdmin) => {
   }
 }
 
+const finalizaAlert = () => {
+  store.commit('finalizaAlert')
+}
+
 router.beforeResolve(async (to, from, next) => {
   try {
     if(to.meta.rotaAutenticada){
@@ -71,6 +75,7 @@ router.beforeResolve(async (to, from, next) => {
       }
       next()
     }
+    finalizaAlert()
     next()
   } catch(e){
     enviaParaHome()

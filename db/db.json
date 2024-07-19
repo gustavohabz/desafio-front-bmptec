@@ -60,11 +60,11 @@
       "dataAtendimento": "25/07/2024",
       "servicos": [
         {
-          "id": "8",
-          "nome": "Manutenção do Ar Condicionado",
-          "valor": 95,
-          "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 0
+          "id": "2",
+          "nome": "Troca de Óleo",
+          "valor": 150,
+          "descricao": "Troque o Óleo do seu carro com uma equipe especializada",
+          "status": 2
         }
       ]
     },
@@ -78,25 +78,11 @@
       "dataAtendimento": "10/07/2024",
       "servicos": [
         {
-          "id": "1",
-          "nome": "Troca do Pneu",
-          "valor": 20,
-          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
-          "status": 1
-        },
-        {
-          "id": "7",
-          "nome": "Substituição de velas de ignição",
-          "valor": 160,
-          "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 2
-        },
-        {
           "id": "8",
           "nome": "Manutenção do Ar Condicionado",
           "valor": 95,
           "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 2
+          "status": 0
         }
       ]
     }

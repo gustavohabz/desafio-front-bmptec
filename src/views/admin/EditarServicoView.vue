@@ -134,7 +134,7 @@ export default {
             servicos: [],
             selectStatusItems: [],
             selectServicos: [],
-            alertSucessoSalvar: this.$constants.getAlert('sucesso', 'Salvo com sucesso.', 5000),
+            alertSucessoSalvar: this.$constants.getAlert('sucesso', 'Serviços alterados com sucesso.', 5000),
             alertErroSalvar: this.$constants.getAlert('erro', 'Erro ao salvar os serviços.', 5000),
             alertErroItemDuplicado: this.$constants.getAlert('erro', 'Existem itens duplicados.', 5000),
             alertErroSemServicos: this.$constants.getAlert('erro', 'Registre ao menos um serviço.', 5000)
@@ -152,7 +152,6 @@ export default {
             const response = await this.$api.Atendimento.Patch(this.atendimentoId, obj)
             if(response){
                 this.triggerAlert(this.alertSucessoSalvar)
-                this.$router.push({name: 'servicosListar'})
             }else{
                 this.triggerAlert(this.alertErroSalvar)
             }
@@ -164,7 +163,6 @@ export default {
             this.fetchServicos()
         },
         removeServico(index) {
-            this.servicosTabela.splice(index, 1)
             this.atendimento.servicos.splice(index, 1)
         },
         addServico() {

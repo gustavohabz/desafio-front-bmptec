@@ -4,7 +4,7 @@
             <v-row>
                 <v-col cols="11">
                     <h3 style="padding-top: 16px" class="text-center">
-                        CADASTRO DE CLIENTE 
+                        CADASTRO DE {{isUsuarioAdmin ? 'ADMIN' : 'CLIENTE'}}
                     </h3>
                 </v-col>
                 <v-col cols="1">
@@ -76,6 +76,12 @@
 import {mask} from 'vue-the-mask'
 export default {
     directives: {mask},
+    mounted(){
+        this.isUsuarioAdmin = this.$store.getters.getUsuarioLogin.admin
+        if(this.isUsuarioAdmin){
+            this.usuario.admin = true
+        }
+    },
     methods: {
         async validaExistenciaCpf(){
             const response = await this.$api.Usuario.GetByCpf(this.usuario.cpf)
@@ -112,6 +118,7 @@ export default {
                 cpf: '',
                 admin: false
             },
+            isUsuarioAdmin: false,
             formValido: false,
             loading: false,
             alertErroCadastro: this.$constants.getAlert('erro', 'Já existe um usuário com este CPF.', 5000),

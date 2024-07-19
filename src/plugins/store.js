@@ -28,11 +28,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    usuarioLogin (state, usuarioLogin){
+    realizaLogin (state, usuarioLogin){
       state.usuarioLogin = usuarioLogin
       localStorage.setItem('usuarioLogin', JSON.stringify(usuarioLogin))
     },
-    usuarioLogout (state){
+    realizaLogout (state){
       state.usuarioLogin = {}
       localStorage.removeItem('usuarioLogin')
     },
@@ -55,6 +55,7 @@ export default new Vuex.Store({
     },
     finalizaAlert(state){
       state.infoAlert.mostraAlert = false
+      clearTimeout(state.idTimeoutAlert)
     }
   },
   actions: {
@@ -67,6 +68,12 @@ export default new Vuex.Store({
     },
     finalizaAlert({commit}){
       commit('finalizaAlert')
+    },
+    realizaLogin({commit}, usuarioLogin){
+      commit('realizaLogin', usuarioLogin)
+    },
+    realizaLogout({commit}){
+      commit('realizaLogout')
     }
   },
   modules: {},

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <NavbarAdmin v-if="isUsuarioLogado"/>
+      <NavbarAdmin v-if="usuarioLogado"/>
       <router-view />
       <AppFooter/>
     </v-main>
@@ -11,6 +11,7 @@
 <script>
 import NavbarAdmin from './components/NavbarAdmin.vue'
 import AppFooter from './components/AppFooter.vue'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     NavbarAdmin,
@@ -18,23 +19,27 @@ export default {
   },
   name: 'App',
   computed: {
-      usuarioLogado() {
-          return this.$store.getters.getUsuarioLogin
-      }
+      ...mapGetters([
+          'getUsuarioLogin'
+      ])
   },
-  updated() {
-    this.$store.commit('inicializaStore')
+  async updated() {
+    await this.atualizaStoreLogin()
+    this.usuarioLogado = this.$store.getters.getUsuarioLogin
     if(this.usuarioLogado){
-      this.isUsuarioLogado = (this.usuarioLogado.hasOwnProperty('id'))
       this.isUsuarioAdmin = this.usuarioLogado.admin        
     }else{
       this.isUsuarioAdmin = false
-      this.isUsuarioLogado = false
     }
   },
+  methods: {
+    ...mapActions([
+        'atualizaStoreLogin'
+    ]),
+  },
   data: () => ({
-    isUsuarioLogado: false,
-    isUsuarioAdmin: false
+    isUsuarioAdmin: false,
+    usuarioLogado: {}
   }),
 }
 </script>

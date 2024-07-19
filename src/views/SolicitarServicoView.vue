@@ -1,5 +1,10 @@
 <template>
     <v-card class="px-6 py-6" elevation="24" style="height: 85%">
+        <v-row>
+            <v-col cols="12">
+                <AlertComponente />
+            </v-col>
+        </v-row>
         <v-row class="py-12">
             <v-col cols="12">
                 <TituloCardAtendimento />
@@ -94,10 +99,12 @@
 import {mask} from 'vue-the-mask'
 import FormAtendimentoServico from './../components/FormAtendimentoServico.vue'
 import TituloCardAtendimento from './../components/TituloCardAtendimento.vue'
+import AlertComponente from './../components/AlertComponente.vue'
 export default {
     components: {
         FormAtendimentoServico,
-        TituloCardAtendimento
+        TituloCardAtendimento,
+        AlertComponente
     },
     directives: {mask},
     methods: {
@@ -106,7 +113,6 @@ export default {
             const response = await this.$api.Atendimento.Post(atendimentoObjFinal)
             if(response){
                 this.triggerAlert(this.alertSucessoAdicionar)
-                this.$router.push({name: 'servicosListar'})
             }else{
                 this.triggerAlert(this.alertErroAdicionar)
             }
