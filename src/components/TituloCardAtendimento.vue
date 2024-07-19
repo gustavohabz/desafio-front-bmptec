@@ -11,7 +11,7 @@
                     <v-icon 
                         x-large 
                         title="Voltar" 
-                        @click="$router.push({name: 'servicos'})">
+                        @click="$router.back()">
                         mdi-close-circle-outline
                     </v-icon>
                 </h3>

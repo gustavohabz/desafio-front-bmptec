@@ -60,18 +60,11 @@
       "dataAtendimento": "25/07/2024",
       "servicos": [
         {
-          "id": "1",
-          "nome": "Troca do Pneu",
-          "valor": 20,
-          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
-          "status": 2
-        },
-        {
           "id": "8",
           "nome": "Manutenção do Ar Condicionado",
           "valor": 95,
           "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 1
+          "status": 0
         }
       ]
     },
@@ -85,25 +78,25 @@
       "dataAtendimento": "10/07/2024",
       "servicos": [
         {
-          "id": "10",
-          "nome": "Instalação de Alarme e Travas Elétricas",
-          "valor": 530,
-          "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 0
+          "id": "1",
+          "nome": "Troca do Pneu",
+          "valor": 20,
+          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
+          "status": 1
         },
         {
           "id": "7",
           "nome": "Substituição de velas de ignição",
           "valor": 160,
           "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 1
+          "status": 2
         },
         {
           "id": "8",
           "nome": "Manutenção do Ar Condicionado",
           "valor": 95,
           "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 0
+          "status": 2
         }
       ]
     }

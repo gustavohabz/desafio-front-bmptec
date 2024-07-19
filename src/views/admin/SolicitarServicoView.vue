@@ -32,26 +32,39 @@
                                         v-model="formClienteValido"
                                         ref="formClienteRef"
                                         >
-                                        <v-autocomplete
-                                            maxlength="14"
-                                            label="CPF"
-                                            outlined
-                                            no-data-text="Nenhum CPF encontrado."
-                                            :rules="$formRules.usuarioIdCpf"
-                                            :items="usuarios"
-                                            item-text="cpf"
-                                            item-value="id"
-                                            required
-                                            :loading="loadingCpf"
-                                            placeholder="000.000.000-00"
-                                            :search-input.sync="pesquisaCpf"
-                                            v-model="atendimentoCliente.usuarioId"
-                                            style="padding-top: 16px"
-                                        >
-                                            <template v-slot:item="data">
-                                                {{data.item.nome}} - {{data.item.cpf}}
+                                        <v-menu offset-y>
+                                            <template v-slot:activator="{ on, attrs}">
+                                                <v-text-field
+                                                    v-mask="'###.###.###-##'"
+                                                    v-on="on"
+                                                    v-bind="attrs"
+                                                    v-model="pesquisaCpf"
+                                                    maxlength="14"
+                                                    outlined
+                                                    label="CPF"
+                                                    required
+                                                    :rules="$formRules.cpf"
+                                                    :loading="loadingCpf"
+                                                    placeholder="000.000.000-00"
+                                                    style="padding-top: 16px"
+                                                ></v-text-field>
                                             </template>
-                                        </v-autocomplete>
+                                            <v-list>
+                                                <v-list-item v-show="usuarios.length == 0">
+                                                    <v-list-title>
+                                                        Nenhum usuário encontrado
+                                                    </v-list-title>
+                                                </v-list-item>
+                                                <v-list-item v-show="usuarios.length > 0"
+                                                    v-for="(usuario, index) in usuarios" :key="index"
+                                                    link
+                                                    @click="setCliente(usuario)">
+                                                    <v-list-title>
+                                                        {{usuario.nome}} - {{usuario.cpf}}
+                                                    </v-list-title>
+                                                </v-list-item>
+                                            </v-list>
+                                        </v-menu>
                                     </v-form>
                                 </v-col>
                             </v-row>
@@ -103,6 +116,10 @@ export default {
             const response = await this.$api.Usuario.GetByCpf(cpf)
             this.usuarios = [response]
             this.loadingCpf = false
+        },
+        setCliente(usuario) {
+            this.atendimentoCliente.usuarioId = usuario.id
+            this.pesquisaCpf = usuario.cpf
         },
         validaFormCpf() {
             if(this.$refs.formClienteRef.validate()){

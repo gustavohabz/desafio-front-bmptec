@@ -216,7 +216,6 @@ export default {
             }else{
                 try {
                     this.usuarioStorage = JSON.parse(localStorage.getItem('usuarioLogin'))
-                    console.log(this.usuarioStorage)
                 } catch(e){
                     console.log('Erro')
                 }

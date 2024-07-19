@@ -42,6 +42,7 @@
                     :loading="loading"
                     loading-text="Carregando..."
                     hide-default-footer
+                    disable-pagination
                 >
                     <template v-slot:item="row">
                         <tr>
