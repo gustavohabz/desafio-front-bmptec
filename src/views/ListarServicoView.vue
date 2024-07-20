@@ -72,7 +72,7 @@
                                     class="rounded elevation-4"
                                     x-big
                                 >
-                                    <span style="top: 100%">
+                                    <span style="top: 100%" class="text-uppercase">
                                         {{getStatus(row.item.servicos)}}
                                     </span>
                                 </v-chip>

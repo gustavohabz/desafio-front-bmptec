@@ -133,7 +133,6 @@ export default {
             const response = await this.$api.Usuario.Post(this.usuario)
             if(response){
                 this.triggerAlert(this.alertSucessoCadastro)
-                this.resetaForm()
                 this.$emit('realizando-login')
             }
             this.loading = false
