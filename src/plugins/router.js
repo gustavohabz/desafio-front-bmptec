@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store'
+import api from './_api'
 
 Vue.use(VueRouter)
 
@@ -30,9 +31,9 @@ const routes = [
     component: () => import('../views/admin/EditarServicoView.vue'),
     meta: { rotaAutenticada: true, rotaAdmin: true }
   },
-  { path: '/admin/adicionar',
-    name: 'AdicionaAdmin',
-    component: () => import('../views/admin/AdicionaAdminView.vue'),
+  { path: '/admin/cadastro',
+    name: 'cadastroAdmin',
+    component: () => import('../views/admin/CadastroAdminView.vue'),
     meta: { rotaAutenticada: true, rotaAdmin: true }
   },
   { path: '*',
@@ -48,7 +49,8 @@ const router = new VueRouter({
   routes,
 })
 
-const enviaParaHome = () =>{
+const enviarParaHomeRealizaLogout = () =>{
+  store.commit('realizaLogout')
   router.push({name: 'home'}).catch(()=>{})
 }
 
@@ -66,24 +68,33 @@ const finalizaAlert = () => {
   store.commit('finalizaAlert')
 }
 
+const validaUsuarioLogadoBD = async (id) => {
+  try {
+    await api.Usuario.GetById(id)
+  } catch (e) {
+    enviarParaHomeRealizaLogout()
+  }
+}
+
 router.beforeResolve(async (to, from, next) => {
   try {
     if(to.meta.rotaAutenticada){
       const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogin'))
-      if(usuarioLogado){
+      if(usuarioLogado && usuarioLogado != null){
+        validaUsuarioLogadoBD(usuarioLogado.id)
         if(to.meta.rotaAdmin){
           validaRotaAdmin(usuarioLogado.admin)
         }
         next()
       }else{
-        enviaParaHome()
+        enviarParaHomeRealizaLogout()
       }
       next()
     }
     finalizaAlert()
     next()
   } catch(e){
-    enviaParaHome()
+    enviarParaHomeRealizaLogout()
   }
 })
 

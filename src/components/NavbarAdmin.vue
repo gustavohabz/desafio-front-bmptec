@@ -5,23 +5,23 @@
         style="z-index: 1">
         <v-toolbar-title @click="$router.push({name: 'servicos'})" class="hover-click">
             <strong class="ml-6" >
-                <img class="mr-3" height="32px" src="../assets/logo.png" /> 
+                <img class="mr-3" height="32px" src="../assets/logo.png" style="vertical-align: middle"/> 
                 AUTO ELÉTRICA FULLTECH
             </strong>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <strong>
             {{usuarioLogado.nome}} 
-            <!-- <span class="ml-6" v-show="usuarioLogado.admin">
+            <span class="ml-2 amber--text" v-show="usuarioLogado.admin">
                 (ADMIN)
-            </span> -->
+            </span>
             <v-btn 
                 v-show="usuarioLogado.admin" 
-                @click="$router.push({name: 'AdicionaAdmin'})" 
+                @click="$router.push({name: 'cadastroAdmin'})" 
                 class="hover-click ml-6"
                 fab
                 text
-                title="Adicionar Usuário Admin">
+                title="Cadastrar Usuários">
                 <v-icon>
                     mdi-account-plus
                 </v-icon>
@@ -50,6 +50,12 @@ export default {
     async mounted(){
         await this.atualizaStoreLogin()
         this.usuarioLogado = this.$store.getters.getUsuarioLogin
+        if(this.usuarioLogado == null){
+            this.usuarioLogado = {
+                nome: null,
+                admin: false
+            }
+        }
     },
     data() {
         return {

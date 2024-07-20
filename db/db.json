@@ -9,43 +9,91 @@
       "admin": true
     },
     {
-      "id": "7dce",
-      "telefone": "(47) 88778-8999",
-      "email": "emailfake@gmail.com.br",
-      "nome": "Gustavo Habitzreiter",
+      "id": "43cd",
+      "telefone": "(22) 22222-2222",
+      "email": "joao.ramirez@cliente.com.br",
+      "nome": "João Ramirez",
+      "cpf": "999.999.999-99",
+      "admin": false
+    },
+    {
+      "id": "4e1d",
+      "telefone": "(88) 77777-7777",
+      "email": "gustavo.admin@gmail.com",
+      "nome": "Gustavo Administrador",
       "cpf": "555.555.555-55",
+      "admin": true
+    },
+    {
+      "id": "c35e",
+      "telefone": "(65) 66666-6666",
+      "email": "cleber.mendonca@gmail.com",
+      "nome": "Cléber Mendonça",
+      "cpf": "888.888.888-77",
+      "admin": true
+    },
+    {
+      "id": "db84",
+      "telefone": "(99) 88888-8888",
+      "email": "juan.silva@gmail.com.br",
+      "nome": "Juan da Silva",
+      "cpf": "888.772.321-11",
+      "admin": true
+    },
+    {
+      "id": "5296",
+      "telefone": "(21) 12312-3123",
+      "email": "marcos@gmail.com",
+      "nome": "Marcos",
+      "cpf": "666.554.323-42",
       "admin": false
     },
     {
-      "id": "ef9c",
+      "id": "c81b",
+      "telefone": "(12) 83817-2321",
+      "email": "bruno.moura@gmail.com",
+      "nome": "Bruno Moura",
+      "cpf": "990.082.181-28",
+      "admin": true
+    },
+    {
+      "id": "4d9e",
+      "telefone": "(19) 21923-1092",
+      "email": "askmd@aksmda.com.br",
+      "nome": "José da Silva",
+      "cpf": "192.109.231-09",
+      "admin": false
+    },
+    {
+      "id": "c896",
+      "telefone": "(12) 31313-1231",
+      "email": "1231@132321.com.br",
+      "nome": "sadasdasd",
+      "cpf": "231.231.312-32",
+      "admin": true
+    },
+    {
+      "id": "0db2",
+      "telefone": "(12) 31231-3122",
+      "email": "clienteform@principal.com.br",
+      "nome": "Cliente via form principal",
+      "cpf": "998.877.665-55",
+      "admin": false
+    },
+    {
+      "id": "6af4",
       "telefone": "(00) 00000-0000",
-      "email": "gustavo.lima@e.vc",
-      "nome": "Gustavo Lima",
-      "cpf": "888.888.888-88",
-      "admin": false
-    },
-    {
-      "id": "f349",
-      "telefone": "(12) 31231-3121",
-      "email": "email@teste.com.br",
-      "nome": "1212312312312",
+      "email": "usuariozero@gmail.com",
+      "nome": "Usuário do Zero",
       "cpf": "222.222.222-22",
       "admin": false
     },
     {
-      "id": "60db",
-      "telefone": "(66) 66666-6666",
-      "email": "teste@testeado.com.br",
-      "nome": "Novo Usuário",
-      "cpf": "121.212.121-21",
-      "admin": false
-    },
-    {
-      "id": "6440",
-      "telefone": "(92) 92929-2929",
-      "email": "sucesso@cliente.com.br",
-      "nome": "Cliente Sucesso",
-      "cpf": "000.000.000-00",
+      "id": "e7fd",
+      "telefone": "(14) 34234-2342",
+      "email": "logado@gmail.com.br",
+      "nome": "usuário criado por um cliente logado",
+      "cpf": "444.444.444-44",
       "admin": false
     }
   ],
@@ -60,10 +108,10 @@
       "dataAtendimento": "25/07/2024",
       "servicos": [
         {
-          "id": "2",
-          "nome": "Troca de Óleo",
-          "valor": 150,
-          "descricao": "Troque o Óleo do seu carro com uma equipe especializada",
+          "id": "8",
+          "nome": "Manutenção do Ar Condicionado",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
           "status": 2
         }
       ]
@@ -82,7 +130,14 @@
           "nome": "Manutenção do Ar Condicionado",
           "valor": 95,
           "descricao": "Equipe especializada pronta para cuidar do seu carro",
-          "status": 0
+          "status": 2
+        },
+        {
+          "id": "11",
+          "nome": "Troca de bateria",
+          "valor": 230,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 2
         }
       ]
     },
@@ -99,6 +154,259 @@
           "id": "5",
           "nome": "Balanceamento",
           "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 1
+        },
+        {
+          "id": "6",
+          "nome": "Alinhamento",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 1
+        }
+      ]
+    },
+    {
+      "id": "9a06",
+      "usuarioId": "4e1d",
+      "modeloVeiculo": "CORSA",
+      "corVeiculo": "PRATA",
+      "placaVeiculo": "RTY-2313",
+      "anoVeiculo": 2017,
+      "dataAtendimento": "24/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "4",
+          "nome": "Cambagem",
+          "valor": 80,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "c438",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "PALIO",
+      "corVeiculo": "AZUL",
+      "placaVeiculo": "KOJ-0289",
+      "anoVeiculo": 1999,
+      "dataAtendimento": "02/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "1",
+          "nome": "Troca do Pneu",
+          "valor": 20,
+          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
+          "status": 0
+        },
+        {
+          "id": "2",
+          "nome": "Troca de Óleo",
+          "valor": 150,
+          "descricao": "Troque o Óleo do seu carro com uma equipe especializada",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "5490",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "PALIO",
+      "corVeiculo": "AZUL",
+      "placaVeiculo": "KOJ-0289",
+      "anoVeiculo": 1999,
+      "dataAtendimento": "02/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "1",
+          "nome": "Troca do Pneu",
+          "valor": 20,
+          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "ba31",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "PALIO",
+      "corVeiculo": "AZUL",
+      "placaVeiculo": "KOJ-0289",
+      "anoVeiculo": 1999,
+      "dataAtendimento": "02/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "1",
+          "nome": "Troca do Pneu",
+          "valor": 20,
+          "descricao": "Troque seu pneu com maior segurança e tranquilidade",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "c120",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "CORSA",
+      "corVeiculo": "BRANCO",
+      "placaVeiculo": "OKI-2321",
+      "anoVeiculo": 2023,
+      "dataAtendimento": "03/07/2024",
+      "servicos": [
+        {
+          "id": "6",
+          "nome": "Alinhamento",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "d236",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "CORSA",
+      "corVeiculo": "BRANCO",
+      "placaVeiculo": "OKI-2321",
+      "anoVeiculo": 2023,
+      "dataAtendimento": "03/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "4",
+          "nome": "Cambagem",
+          "valor": 80,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "6",
+          "nome": "Alinhamento",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "ae45",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "CORSA",
+      "corVeiculo": "BRANCO",
+      "placaVeiculo": "OKI-2321",
+      "anoVeiculo": 2023,
+      "dataAtendimento": "03/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "4",
+          "nome": "Cambagem",
+          "valor": 80,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "6",
+          "nome": "Alinhamento",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "a726",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "CORSA",
+      "corVeiculo": "BRANCO",
+      "placaVeiculo": "OKI-2321",
+      "anoVeiculo": 2023,
+      "dataAtendimento": "03/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "4",
+          "nome": "Cambagem",
+          "valor": 80,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "6",
+          "nome": "Alinhamento",
+          "valor": 95,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "b170",
+      "usuarioId": "eda2",
+      "modeloVeiculo": "CORSA",
+      "corVeiculo": "BRANCO",
+      "placaVeiculo": "OKI-2321",
+      "anoVeiculo": 2023,
+      "dataAtendimento": "03/07/2024",
+      "servicos": [
+        {
+          "id": "5",
+          "nome": "Balanceamento",
+          "valor": 60,
+          "descricao": "Equipe especializada pronta para cuidar do seu carro",
+          "status": 0
+        },
+        {
+          "id": "4",
+          "nome": "Cambagem",
+          "valor": 80,
           "descricao": "Equipe especializada pronta para cuidar do seu carro",
           "status": 0
         },

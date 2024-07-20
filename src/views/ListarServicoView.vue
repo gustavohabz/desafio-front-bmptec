@@ -1,5 +1,5 @@
 <template>
-    <v-card class="px-12 py-12" height="85%" elevation="6">
+    <v-card class="px-12 py-12" elevation="6">
         <v-row>
             <v-col cols="10" offset="1">
                 <AlertComponente />
@@ -10,12 +10,13 @@
                 <v-data-table
                     :items="atendimentos"
                     :headers="cabecalhos"
-                    class="grey darken-1 elevation-6"
-                    no-data-text="Nenhum serviço registrado."
-                    no-results-text="Nenhum serviço encontrado para esta pesquisa."
+                    class="grey darken-1"
+                    no-data-text="Nenhuma ordem de serviço registrada."
+                    no-results-text="Nenhuma ordem serviço encontrado para esta pesquisa."
                     :loading="loading"
                     loading-text="Carregando..."
                     :search="pesquisa"
+                    :custom-filter="filtrarTabela"
                     dark
                 >
                     <template v-slot:top>
@@ -25,6 +26,7 @@
                                     color="success"
                                     fab
                                     elevation="0"
+                                    title="Solicitar Serviço"
                                     @click="$router.push({name: 'servicosSolicitar'})"
                                 >
                                     <v-icon>mdi-plus</v-icon>
@@ -34,11 +36,10 @@
                                     elevation="0"
                                     color="white"
                                     class="ml-12"
+                                    @click="fetchAtendimentos"
+                                    title="Atualizar Lista"
                                 >
-                                    <v-icon 
-                                        color="black"
-                                        @click="fetchAtendimentos"
-                                        >
+                                    <v-icon color="black">
                                         mdi-refresh
                                     </v-icon>
                                 </v-btn>
@@ -48,17 +49,16 @@
                                     v-model="pesquisa"
                                     label="Pesquisar"
                                     append-icon="mdi-magnify"
-                                    @click:append="pesquisar"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
                     </template>
                     <template v-slot:item="row">
                         <tr>
-                            <td align="center">{{row.item.modeloVeiculo}}</td>
-                            <td align="center">{{row.item.corVeiculo}}</td>
-                            <td align="center">{{row.item.placaVeiculo}}</td>
-                            <td align="center">
+                            <td align="center" class="borda-interior-tabela">{{row.item.modeloVeiculo}}</td>
+                            <td align="center" class="borda-interior-tabela">{{row.item.corVeiculo}}</td>
+                            <td align="center" class="borda-interior-tabela">{{row.item.placaVeiculo}}</td>
+                            <td align="center" class="borda-interior-tabela">
                                 <span v-for="(servico, index) in row.item.servicos" :key="index">
                                     <p>
                                         {{servico.nome}} 
@@ -66,7 +66,7 @@
                                     </p>
                                 </span>
                             </td>
-                            <td align="center">
+                            <td align="center" class="borda-interior-tabela">
                                 <v-chip
                                     color="success"
                                     class="rounded elevation-4"
@@ -77,7 +77,7 @@
                                     </span>
                                 </v-chip>
                             </td>
-                            <td align="center" v-show="usuarioLogado.admin">
+                            <td align="center" v-if="usuarioLogado.admin" class="borda-interior-tabela">
                                 <v-btn
                                     text
                                     @click="$router.push({name: 'servicosEditar', params: {id: row.item.id}})"
@@ -139,7 +139,6 @@ export default {
     },
     mounted(){
         this.usuarioLogado = this.$store.getters.getUsuarioLogin
-        console.log(this.$store.getters.getUsuarioLogin)
         this.fetchAtendimentos()
     },
     methods: {
@@ -165,6 +164,14 @@ export default {
             this.isDeletando = false
             this.fetchAtendimentos()
         },
+        fetchServicoById(idArray){
+            let arrResponses = []
+            idArray.forEach(async id => {
+                const response = await this.$api.Servico.GetById(id)
+                arrResponses.push(response)
+            })
+            this.setServico(arrResponses)
+        },
         addCabecalhoAcoes(){
             if(this.naoAdicionouAcoesTabela){
                 this.cabecalhos.push({text: 'AÇÕES', align: 'center', filterable: false, value: 'acoes'})
@@ -174,9 +181,6 @@ export default {
         abreModalDeletarAtendimento(id){
             this.atendimentoIdParaDeletar = id
             this.isDeletando = true
-        },
-        pesquisar(){
-            console.log('pesquisa')
         },
         getStatus(servicos){
             let contadorAguardando = 0
@@ -206,13 +210,8 @@ export default {
         triggerAlert(alerta){
            this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
         },
-        fetchServicoById(idArray){
-            let arrResponses = []
-            idArray.forEach(async id => {
-                const response = await this.$api.Servico.GetById(id)
-                arrResponses.push(response)
-            })
-            this.setServico(arrResponses)
+        filtrarTabela(value, search, item) {
+            return Object.values(item).some(v=>v&&v.toString().toLowerCase().includes(search))
         }
     },
     data() {
@@ -233,11 +232,19 @@ export default {
             isDeletando: false,
             atendimentoIdParaDeletar: null,
             coletouDoComputed: false,
-            alertSucessoRemover: this.$constants.getAlert('sucesso', 'Atendimento removido com sucesso.', 5000),
-            alertErroRemover: this.$constants.getAlert('erro', 'Erro ao remover o atendimento.', 5000),
+            alertSucessoRemover: this.$alerts.alertSucessoRemoverAtendimento,
+            alertErroRemover: this.$alerts.alertErroRemoverAtendimento,
             naoAdicionouAcoesTabela: true,
             usuarioLogado: {}
         }
     }
 }
 </script>
+<style>
+.borda-interior-tabela{
+    border-color: #ffffff !important;
+}
+.v-data-footer{
+    border-color: #ffffff !important;
+}
+</style>

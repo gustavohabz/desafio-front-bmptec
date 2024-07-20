@@ -97,11 +97,17 @@
                 </v-menu>
             </v-col>
         </v-row>
+        <v-row v-show="atendimentoSolicitado">
+            <v-col cols="12" class="text-center">
+                <RouterLink :to="{name: 'servicosListar'}">Visualizar Serviços solicitados</RouterLink>
+            </v-col>
+        </v-row>
         <v-row>
             <v-col cols="4">
                 <v-btn
                     dark
                     @click="$emit('set-passo-1')"
+                    v-show="usuarioLogado.admin"
                 >
                     Voltar
                 </v-btn>
@@ -110,6 +116,7 @@
                 <v-btn
                     color="success"
                     @click="validaForm"
+                    :disabled="enviouForm"
                 >
                     Criar ordem de serviço
                 </v-btn>
@@ -126,6 +133,7 @@ export default {
     mounted() {
         this.fetchServicos()
         this.getAnosDeVeiculo()
+        this.usuarioLogado = this.$store.getters.getUsuarioLogin
     },
     data() {
         return {
@@ -142,7 +150,10 @@ export default {
             },
             loadingServicos: false,
             anosDeVeiculo: [],
-            formServicoValido: false
+            formServicoValido: false,
+            enviouForm: false,
+            usuarioLogado: {},
+            atendimentoSolicitado: false
         }
     },
     methods: {
@@ -158,8 +169,7 @@ export default {
             this.atendimento.dataAtendimento = dataFormatada
         },
         removerServico(item) {
-            const index = this.atendimento.servicos.indexOf(item.index)
-            this.atendimento.servicos.splice(index, 1)
+            this.atendimento.servicos.splice(item.index, 1)
         },
         getAnosDeVeiculo() {
             for(let i=maxAnosDeVeiculo; i>=minAnosDeVeiculo; i--){
@@ -169,6 +179,11 @@ export default {
         validaForm() {
             if(this.$refs.formServicoRef.validate()){
                 this.$emit('criar-ordem', this.atendimento)
+                this.enviouForm = true
+                this.atendimentoSolicitado = true
+                setTimeout(() => {
+                    this.enviouForm = false
+                }, 3000)
             }
         },
     }

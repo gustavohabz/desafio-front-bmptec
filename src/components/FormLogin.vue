@@ -58,8 +58,12 @@ export default {
                     }
                     this.$store.dispatch('realizaLogin', usuarioLogado)
                     this.atualizaStore()
-                    this.$router.push({name: 'servicos'})
+                    setTimeout(()=>{
+                        this.$router.push({name: 'servicos'})
+                        this.loading = false
+                    }, 500)
                 }else{
+                    this.loading = false
                     this.triggerAlert(this.alertErroLogin)
                     this.$emit('realizando-login', true)
                 }
@@ -81,7 +85,7 @@ export default {
             cpf: '',
             formValido: false,
             loading: false,
-            alertErroLogin: this.$constants.getAlert('erro', 'Erro ao realizar login, crie uma conta na opção "cadastrar".', 3000)
+            alertErroLogin: this.$alerts.alertErroLogin
         }
     }
 }

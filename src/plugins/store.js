@@ -63,8 +63,11 @@ export default new Vuex.Store({
       commit('inicializaStore')
     },
     setAndTriggerInfoAlert({commit}, infoAlert){
-      commit('setInfoAlert', infoAlert)
-      commit('mostraAlert', infoAlert.tempoAlert)
+      commit('finalizaAlert')
+      setTimeout(() => {
+        commit('setInfoAlert', infoAlert)
+        commit('mostraAlert', infoAlert.tempoAlert)
+      }, 10)
     },
     finalizaAlert({commit}){
       commit('finalizaAlert')

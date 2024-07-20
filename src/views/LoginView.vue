@@ -21,19 +21,16 @@
                 </v-col>
             </v-row>
         </v-card>
-        <AppFooter />
     </section>
 </template>
 <script>
 import FormLogin from './../components/FormLogin.vue'
 import FormCadastro from './../components/FormCadastro.vue'
-import AppFooter from './../components/AppFooter.vue'
 import AlertComponente from './../components/AlertComponente.vue'
 export default {
     components: {
         FormLogin,
         FormCadastro,
-        AppFooter,
         AlertComponente
     },
     data() {

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <NavbarAdmin v-if="usuarioLogado"/>
+      <NavbarAdmin v-if="$route.name != 'home' && usuarioLogado"/>
       <router-view />
       <AppFooter/>
     </v-main>

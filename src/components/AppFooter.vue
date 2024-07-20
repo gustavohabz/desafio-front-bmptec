@@ -1,7 +1,5 @@
 <template>
-    <v-footer 
-        padless
-        absolute
+    <v-footer
         color="transparent">
         <v-col
             class="text-center"

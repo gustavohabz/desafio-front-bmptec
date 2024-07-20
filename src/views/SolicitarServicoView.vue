@@ -5,14 +5,15 @@
                 <AlertComponente />
             </v-col>
         </v-row>
-        <v-row class="py-12">
+        <v-row class="py-6">
             <v-col cols="12">
                 <TituloCardAtendimento />
             </v-col>
-            <v-col cols="8" offset-xs="0" offset="2">
-                <v-stepper
-                    v-model="passos"
-                >
+            <v-col cols="8" offset-xs="0" offset="2" v-show="!usuarioLogado.admin">
+                <FormAtendimentoServico @criar-ordem="criarOrdem" />
+            </v-col>
+            <v-col cols="8" offset-xs="0" offset="2" v-show="usuarioLogado.admin" class="mb-12">
+                <v-stepper v-model="passos" >
                     <v-stepper-header>
                         <v-stepper-step
                             step="1"
@@ -31,58 +32,9 @@
                     </v-stepper-header>
                     <v-stepper-items>
                         <v-stepper-content step="1">
-                            <v-row>
-                                <v-col lg="6" md="6" sm="12" xs="12" offset-lg="3" offset-md="3">
-                                    <v-form 
-                                        v-model="formClienteValido"
-                                        ref="formClienteRef"
-                                        >
-                                        <v-menu offset-y>
-                                            <template v-slot:activator="{ on, attrs}">
-                                                <v-text-field
-                                                    v-mask="'###.###.###-##'"
-                                                    v-on="on"
-                                                    v-bind="attrs"
-                                                    v-model="pesquisaCpf"
-                                                    maxlength="14"
-                                                    outlined
-                                                    label="CPF"
-                                                    required
-                                                    :rules="$formRules.cpf"
-                                                    :loading="loadingCpf"
-                                                    placeholder="000.000.000-00"
-                                                    style="padding-top: 16px"
-                                                ></v-text-field>
-                                            </template>
-                                            <v-list>
-                                                <v-list-item v-show="usuarios.length == 0">
-                                                    <v-list-title>
-                                                        Nenhum usuário encontrado
-                                                    </v-list-title>
-                                                </v-list-item>
-                                                <v-list-item v-show="usuarios.length > 0"
-                                                    v-for="(usuario, index) in usuarios" :key="index"
-                                                    link
-                                                    @click="setCliente(usuario)">
-                                                    <v-list-title>
-                                                        {{usuario.nome}} - {{usuario.cpf}}
-                                                    </v-list-title>
-                                                </v-list-item>
-                                            </v-list>
-                                        </v-menu>
-                                    </v-form>
-                                </v-col>
-                            </v-row>
-                            <v-row class="text-right">
-                                <v-col cols="12">
-                                    <v-btn
-                                        color="success"
-                                        @click="validaFormCpf"
-                                    >
-                                        Continuar
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
+
+                            <FormAtendimentoCliente @set-cliente-proximo-passo="setClienteProximoPasso" />
+
                         </v-stepper-content>
                         <v-stepper-content step="2">
 
@@ -96,17 +48,23 @@
     </v-card>
 </template>
 <script>
-import {mask} from 'vue-the-mask'
 import FormAtendimentoServico from './../components/FormAtendimentoServico.vue'
+import FormAtendimentoCliente from './../components/FormAtendimentoCliente.vue'
 import TituloCardAtendimento from './../components/TituloCardAtendimento.vue'
 import AlertComponente from './../components/AlertComponente.vue'
 export default {
     components: {
         FormAtendimentoServico,
+        FormAtendimentoCliente,
         TituloCardAtendimento,
         AlertComponente
     },
-    directives: {mask},
+    mounted(){
+        this.usuarioLogado = this.$store.getters.getUsuarioLogin
+        if(!this.usuarioLogado.admin){
+            this.atendimentoCliente.usuarioId = this.usuarioLogado.id
+        }
+    },
     methods: {
         async criarOrdem(atendimentoServico) {
             const atendimentoObjFinal = {...this.atendimentoCliente, ...atendimentoServico}
@@ -117,20 +75,9 @@ export default {
                 this.triggerAlert(this.alertErroAdicionar)
             }
         },
-        async findUsuariosByCpf(cpf) {
-            this.loadingCpf = true
-            const response = await this.$api.Usuario.GetByCpf(cpf)
-            this.usuarios = [response]
-            this.loadingCpf = false
-        },
-        setCliente(usuario) {
-            this.atendimentoCliente.usuarioId = usuario.id
-            this.pesquisaCpf = usuario.cpf
-        },
-        validaFormCpf() {
-            if(this.$refs.formClienteRef.validate()){
-                this.passos = 2
-            }
+        setClienteProximoPasso(atendimentoCliente){
+            this.atendimentoCliente = atendimentoCliente
+            this.passos = 2
         },
         triggerAlert(alerta){
            this.$store.dispatch('setAndTriggerInfoAlert', alerta) 
@@ -139,24 +86,10 @@ export default {
     data(){
         return{
             passos: 1,
-            atendimentoCliente: {
-                usuarioId: ''
-            },
-            formClienteValido: false,
-            loadingCpf: false,
-            pesquisaCpf: '',
-            usuarios: [],
-            alertSucessoAdicionar: this.$constants.getAlert('sucesso', 'Atendimento solicitado.', 5000),
-            alertErroAdicionar: this.$constants.getAlert('erro', 'Erro ao solicitar atendimento.', 5000),
-        }
-    },
-    watch: {
-        pesquisaCpf (val) {
-            if(val){
-                if(val.length == 14){
-                    this.findUsuariosByCpf(val)
-                }
-            }
+            atendimentoCliente: {},
+            alertSucessoAdicionar: this.$alerts.alertSucessoSolicitarAtendimento,
+            alertErroAdicionar: this.$alerts.alertErroSolicitarAtendimento,
+            usuarioLogado: {}
         }
     }
 }

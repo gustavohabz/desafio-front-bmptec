@@ -56,8 +56,8 @@
                     disable-pagination
                 >
                     <template v-slot:item="row">
-                        <tr>
-                            <td align="center" width="150">
+                        <tr class="bg grey lighten-2">
+                            <td align="center" width="150" class="borda-tabela">
                                 <v-autocomplete
                                     :items="selectServicos"
                                     :loading="loadingServicosAll"
@@ -146,10 +146,10 @@ export default {
             selectStatusItems: [],
             selectServicos: [],
             servicoNaoEncontrado: false,
-            alertSucessoSalvar: this.$constants.getAlert('sucesso', 'Serviços alterados com sucesso.', 5000),
-            alertErroSalvar: this.$constants.getAlert('erro', 'Erro ao salvar os serviços.', 5000),
-            alertErroItemDuplicado: this.$constants.getAlert('erro', 'Existem itens duplicados.', 5000),
-            alertErroSemServicos: this.$constants.getAlert('erro', 'Registre ao menos um serviço.', 5000)
+            alertSucessoSalvar: this.$alerts.alertSucessoEditarServicos,
+            alertErroSalvar: this.$alerts.alertErroEditarServicos,
+            alertErroItemDuplicado: this.$alerts.alertErroServicosDuplicados,
+            alertErroSemServicos: this.$alerts.alertErroNenhumServico
         }
     },
     methods: {
